@@ -18,16 +18,18 @@ const FILES_TO_CACHE = [
 
 // cache resources
 self.addEventListener("install", function (e) {
-    e.WaitUntil(
+    e.waitUntil(
       caches.open(CACHE_NAME).then(function (cache) {
         return cache.addAll(FILES_TO_CACHE);
       })
     );
+
+    self.skipWaiting();
   });
 
 // delete outdated caches
 self.addEventListener("activate", function (e) {
-  e.WaitUntil(
+  e.waitUntil(
     caches.keys().then(function (keyList) {
       let cacheKeeplist = keyList.filter(function (key) {
         return key.indexOf(APP_PREFIX);
@@ -43,6 +45,8 @@ self.addEventListener("activate", function (e) {
       );
     })
   );
+
+  self.clients.claim();
 });
 
 // respond with cached resources
