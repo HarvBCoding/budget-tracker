@@ -51,13 +51,22 @@ self.addEventListener("activate", function (e) {
 
 // respond with cached resources
 self.addEventListener("fetch", function (e) {
-    e.respondWith(
-      caches.match(e.request).then(function (request) {
-        if (request) {
-          return request
-        } else {
-          return fetch(e.request)
-        }
-      })
-    );
-  });
+  console.log("fetch request : " + e.request.url);
+  // respondWith method will intercept the fetch request
+  e.respondWith(
+      // .match() will determine if the resource already exists in caches
+    caches.match(e.request).then(function (request) {
+        // if it does, log the url to the console w/ a message
+      if (request) {
+        console.log("responding with cache : " + e.request.url);
+        //  & then return the cached resource
+        return request;
+        // if it's not in caches, allow the resource to be retrieved from the online network
+      } else {
+        console.log("file is not cached, fetching : " + e.request.url);
+        return fetch(e.request);
+      }
+    })
+  );
+});
+

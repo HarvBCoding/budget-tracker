@@ -1,6 +1,5 @@
 // create the variable for db connection
 let db;
-
 // establish a connection to IndexedDB set to version 1
 const request = indexedDB.open("budget_tracker", 1);
 
@@ -9,7 +8,7 @@ request.onupgradeneeded = function (event) {
   // save reference to the database
   const db = event.target.result;
   // create an object store
-  db.createObjectStore("new transaction", { autoIncrement: true });
+  db.createObjectStore("new_entry", { autoIncrement: true });
 };
 
 // when the connection is successful
@@ -19,7 +18,7 @@ request.onsuccess = function (event) {
 
   // check if app is online, if yes upload the transaction
   if (navigator.onLine) {
-    // uploadTransaction();
+    uploadEntries();
   }
 };
 
@@ -62,7 +61,7 @@ function uploadEntries() {
           // open another transaction
           const transaction = db.transaction(["new_entry"], "readwrite");
           // access the new object store
-          const budgetObjectStore = transaction.objectStore("new_pizza");
+          const budgetObjectStore = transaction.objectStore("new_entry");
           // clear all items in the store
           budgetObjectStore.clear();
 
