@@ -7,27 +7,14 @@ const FILES_TO_CACHE = [
   "./public/js/index.js",
 ];
 
-// respond with cached resources
-self.addEventListener("fetch", function (e) {
-  e.respondWith(
-    caches.match(e.request).then(function (request) {
-      if (request) {
-        return request
-      } else {
-        return fetch(e.request)
-      }
-    })
-  );
-});
-
 // cache resources
 self.addEventListener("install", function (e) {
-  e.WaitUntil(
-    caches.open(CACHE_NAME).then(function (cache) {
-      return cache.addAll(FILES_TO_CACHE);
-    })
-  );
-});
+    e.WaitUntil(
+      caches.open(CACHE_NAME).then(function (cache) {
+        return cache.addAll(FILES_TO_CACHE);
+      })
+    );
+  });
 
 // delete outdated caches
 self.addEventListener("activate", function (e) {
@@ -48,3 +35,16 @@ self.addEventListener("activate", function (e) {
     })
   );
 });
+
+// respond with cached resources
+self.addEventListener("fetch", function (e) {
+    e.respondWith(
+      caches.match(e.request).then(function (request) {
+        if (request) {
+          return request
+        } else {
+          return fetch(e.request)
+        }
+      })
+    );
+  });
