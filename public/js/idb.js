@@ -18,7 +18,7 @@ request.onsuccess = function (event) {
 
   // check if app is online, if yes upload the transaction
   if (navigator.onLine) {
-    uploadEntries();
+    uploadEntry();
   }
 };
 
@@ -34,7 +34,7 @@ function saveRecord(record) {
   budgetObjectStore.add(record);
 }
 
-function uploadEntries() {
+function uploadEntry() {
   // open a transaction on the db
   const transaction = db.transaction(["new_entry"], "readwrite");
   // access the object store
@@ -75,4 +75,4 @@ function uploadEntries() {
 }
 
 // listen for app coming back online
-window.addEventListener("online", uploadEntries);
+window.addEventListener("online", uploadEntry);
