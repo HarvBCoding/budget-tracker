@@ -42,7 +42,7 @@ function uploadEntry() {
   // get all records
   const getAll = budgetObjectStore.getAll();
   // once the .getAll is successful
-  getAll.onsucess = function () {
+  getAll.onsuccess = function () {
     // if there was data in the object store, send it to the server
     if (getAll.result.length > 0) {
       fetch("/api/transaction", {
