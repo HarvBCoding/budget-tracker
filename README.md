@@ -8,7 +8,7 @@
   ## Table of Contents
   * [Installation](#installation-instructions)
   * [Usage](#usage)
-  
+  * [Contributing](#contributing)
   * [Tests](#tests)
   * [Questions](#questions)
   
@@ -28,7 +28,8 @@
 
   
   ## Tests
-  Code Examples recommended for testing: screenshots
+  Image examples of site functionality:
+  ![Example](/Budget-Tracker-Screenshot.png)
 
   ## Questions
   If you have any questions or need to report bugs please reach out to me at [HarvBCoding](https://www.github.com/HarvBCoding) or harvey.breania@gmail.com
